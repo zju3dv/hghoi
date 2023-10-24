@@ -1,0 +1,87 @@
+TYPE: 'VQVAETrainer'
+cfg:
+  DATALOADER:
+    num_workers: 4
+    batch_size: 256
+  DATASET:
+    TYPE: 'TrajCompletionData'
+    cfg:
+      is_env: True
+      data_dir: "./datasets/samp/MotionWorld"
+      collate_fn: "variable_length_collate"
+      forward_collate_fn: "variable_length_collate"
+      valid_collate_fn: "variable_length_collate" 
+      valid_batch_size: 256
+      state_dim: 647
+      division: 4
+      L: 61
+      is_pred_absolute_position: True
+      is_pred_invtraj: True
+      is_norm_traj: False
+      is_minmax: True
+  MODEL:
+    TYPE: 'DDPMTraj'
+    cfg:
+      DECODER_TYPE: 'DDPMTrajCompletionEnvDecoder'
+      state_dim: 122
+      env_dim: 315
+      traj_dim: 12
+      input_pose_dim: 264
+      goal_dim: 9
+      root_dim: 9
+      pred_time_range: 20
+      latent_dim: 256
+      ff_size: 1024
+      num_layers: 4
+      num_heads: 4
+      dropout: 0.1
+      norm: 'LayerNorm'
+      act: "Exp"
+      activation: "SiLU"
+      attention_op: "MHA"
+      L: 61
+      objective: "pred_x0"
+      num_timesteps: 1000
+      sampling_timesteps: 250
+      beta_schedule: "cosine"
+      p2_loss_weight_gamma: 0.0
+      p2_loss_weight_k: 1.0
+      ddim_sampling_eta: 1.0
+      is_minmax: True
+      self_condition: True
+      self_condition_prob: 0.5
+  PIPELINE:
+    TYPE: 'DDPMTrajPipeline'
+    cfg:
+      L: 61
+      func_wrap_pairs: []
+      used_loss: "l1"
+  CRITERION:
+    TYPE: "TimeTrajCriterion"
+    cfg:
+      is_pred_absolute_position: True
+      is_pred_invtraj: True
+      is_Milestone: False
+      is_norm_traj: False
+      is_minmax: True
+  OPTIMIZER:
+    TYPE: "Adam"
+    lr: 0.0001
+  SCHEDULE:
+    max_epochs: 250
+    scheduler:
+      TYPE: "LambdaLR"
+      lr_lambda: "constant_epoch_func"
+  HOOK:
+    hook_save:
+      interval: 10
+    hook_eval:
+      interval: 10
+      test_before_train: False
+      priority: 80
+    hook_anneal:
+      annealing_pairs: []
+    hook_resume:
+      TYPE: 'ResumeHook'
+      priority: 0
+  output_dir: 'work_dirs/traj'

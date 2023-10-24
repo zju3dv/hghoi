@@ -1,0 +1,68 @@
+TYPE: 'VQVAETrainer'
+cfg:
+  DATALOADER:
+    num_workers: 4
+    batch_size: 256
+  DATASET:
+    TYPE: 'GoalPoseEnvData'
+    cfg:
+      data_dir: "./datasets/samp/MotionWorld"
+      valid_batch_size: 64
+      division: 4
+  MODEL:
+    TYPE: 'QPoseNet'
+    cfg:
+      ENCODER_TYPE: 'VQContactEnvPosePartEncoder'
+      QUANTIZE_TYPE: 'KeyQuantizeLayer'
+      DECODER_TYPE: 'VQContactEnvPosePartDecoder'
+      part_dict:     {
+        "body": [0, 9, 10, 11, 16, 17],  # body and head
+        "rh": [18, 19, 20, 21],  # right hand
+        "lh": [12, 13, 14, 15],  # left hand
+        "rl": [5, 6, 7, 8],  # right leg
+        "ll": [1, 2, 3, 4],  # left leg
+      }
+      quant_n: 8
+      quant_key_list: ["body", "rh", "lh", "rl", "ll", "contact"]
+      quant_dim_enc: 4
+      quant_dim_dec: 24
+      joint_dim: 12
+      pose_dim: 264
+      env_dim: 315
+      contact_dim: 5 
+      action_dim: 5
+      dropout: 0.1
+      activation: "ELU"
+  PIPELINE:
+    TYPE: 'QContactPosePipeline'
+    cfg:
+      func_wrap_pairs: []
+      LOSS:
+        RECONSTRUCTION:
+          reduction: "mean"
+        LATENT:
+          weight: 0.1
+          reduction: "mean"
+  CRITERION:
+    TYPE: "PoseNetCriterion"
+  OPTIMIZER:
+    TYPE: "AdamW"
+    lr: 0.0001
+  SCHEDULE:
+    max_epochs: 1000
+    scheduler:
+      TYPE: "LambdaLR"
+      lr_lambda: "constant_epoch_func"
+  HOOK:
+    hook_save:
+      interval: 5
+    hook_eval:
+      interval: 1
+      test_before_train: False
+      priority: 80
+    hook_anneal:
+      annealing_pairs: []
+    hook_resume:
+      TYPE: 'ResumeHook'
+      priority: 0
+  output_dir: 'work_dirs/vqvae_d4_n8'

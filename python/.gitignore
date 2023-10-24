@@ -1,0 +1,49 @@
+*.png
+*.json
+*.diff
+*.jpg
+
+# compilation and distribution
+__pycache__
+_ext
+*.pyc
+*.pyd
+*.so
+*.dll
+*.egg-info/
+build/
+dist/
+wheels/
+
+# pytorch/python/numpy formats
+*.pth
+*.pkl
+*.npy
+*.ts
+
+# ipython/jupyter notebooks
+*.ipynb
+**/.ipynb_checkpoints/
+
+# Editor temporaries
+*.swn
+*.swo
+*.swp
+*~
+
+# editor settings
+.idea
+.vscode
+_darcs
+.history
+.VSCodeCounter
+
+# project dirs
+datasets
+datasets/*
+/datasets/*
+!/datasets/*.*
+/models
+work_dirs
+*_dirs
+*_dirs_*

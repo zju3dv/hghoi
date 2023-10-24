@@ -1,0 +1,12 @@
+# extract on localpose dataset to obtain quant and code, save in posesequence
+cfg:
+  DATASET:
+    TYPE: 'GoalPoseEnvData'
+    cfg:
+      data_dir: "./datasets/samp/MotionWorld"
+      forward_collate_fn: "default_collate"
+      forward_batch_size: 2048
+      valid_batch_size: 2048
+  FUNC:
+    original_dataset_dir: "./datasets/samp/MotionWorld"
+    dataset_save_dir: "./datasets/samp/MotionWorld"

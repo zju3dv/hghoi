@@ -1,0 +1,56 @@
+TYPE: 'VQVAETrainer'
+cfg:
+  DATALOADER:
+    num_workers: 4
+    batch_size: 256
+  DATASET:
+    TYPE: 'GoalPoseEnvCodeData'
+    cfg:
+      data_dir: "./datasets/samp/MotionWorld"
+      valid_batch_size: 64
+      division: 4
+  MODEL:
+    TYPE: 'QMotionCode'
+    cfg:
+      DECODER_TYPE: 'CausalGPTGoalPose'
+      pred_keys: ["contact", "body", "ll", "rl", "rh", "lh"]
+      latent_dim: 256
+      ff_size: 1024
+      num_layers: 4
+      num_heads: 4
+      quant_n: 8
+      env_dim: 315
+      action_dim: 5
+      dropout: 0.1
+      activation: "ELU"
+  PIPELINE:
+    TYPE: 'KeyCodeNetPipeline'
+    cfg:
+      func_wrap_pairs: []
+      LOSS:
+        NLL:
+          weight: 1.0
+  CRITERION:
+    TYPE: "KeyCodeNetCriterion"
+    external_model_config: "work_dirs/vqvae_d4_n8/config.yaml"
+  OPTIMIZER:
+    TYPE: "AdamW"
+    lr: 0.0001
+  SCHEDULE:
+    max_epochs: 1000
+    scheduler:
+      TYPE: "LambdaLR"
+      lr_lambda: "constant_epoch_func"
+  HOOK:
+    hook_save:
+      interval: 1
+    hook_eval:
+      interval: 1
+      test_before_train: False
+      priority: 80
+    hook_anneal:
+      annealing_pairs: []
+    hook_resume:
+      TYPE: 'ResumeHook'
+      priority: 0
+  output_dir: 'work_dirs/vqvae_n8_d4_code'
