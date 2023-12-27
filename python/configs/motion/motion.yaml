@@ -65,7 +65,7 @@ cfg:
     TYPE: "Adam"
     lr: 0.0001
   SCHEDULE:
-    max_epochs: 100
+    max_epochs: 50
     scheduler:
       TYPE: "LambdaLR"
       lr_lambda: "constant_epoch_func"

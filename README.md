@@ -6,15 +6,9 @@
 > Huaijin Pi, Sida Peng, Minghui Yang, Xiaowei Zhou, Hujun Bao \
 > ICCV 2023
 
-## TODOs
+## Running
 
-- [ ] Pretrained models. 
-
-- [ ] Detailed training and testing guides. 
-
-- [x] Release unity code. 
-
-- [x] Release python code. 
+Please see README.md in Python and Unity directories.
 
 ## Citation
 

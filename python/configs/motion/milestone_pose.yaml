@@ -75,4 +75,4 @@ cfg:
     hook_resume:
       TYPE: 'ResumeHook'
       priority: 0
-  output_dir: 'work_dirs/ddpm_milestonepose'
+  output_dir: 'work_dirs/milestonepose'

@@ -37,7 +37,7 @@ cfg:
     TYPE: "AdamW"
     lr: 0.0001
   SCHEDULE:
-    max_epochs: 1000
+    max_epochs: 10
     scheduler:
       TYPE: "LambdaLR"
       lr_lambda: "constant_epoch_func"
@@ -53,4 +53,4 @@ cfg:
     hook_resume:
       TYPE: 'ResumeHook'
       priority: 0
-  output_dir: 'work_dirs/vqvae_n8_d4_code'
+  output_dir: 'work_dirs/gp_d4_n8_code'

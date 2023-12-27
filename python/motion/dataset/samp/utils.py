@@ -1,3 +1,4 @@
+import torch
 import numpy as np
 import os.path as osp
 
@@ -29,7 +30,7 @@ def load_norm_data_prefix(data_dir, split="train", prefix="Input"):
     # Always use norm of training data
     if not osp.exists(osp.join(data_dir, split, f"{prefix}Norm.txt")):
         print(osp.join(data_dir, split, f"{prefix}Norm.txt") + " does not exists!")
-        return 0, 1
+        return torch.zeros(1), torch.ones(1)
 
     input_norm_data = np.float32(
         np.loadtxt(osp.join(data_dir, split, f"{prefix}Norm.txt"))
@@ -47,7 +48,7 @@ def load_minmax_data_prefix(data_dir, split="train", prefix="Input"):
     # Always use norm of training data
     if not osp.exists(osp.join(data_dir, split, f"{prefix}MinMax.txt")):
         print(osp.join(data_dir, split, f"{prefix}MinMax.txt") + " does not exists!")
-        return 0, 1
+        return torch.zeros(1), torch.ones(1)
 
     input_minmax_data = np.float32(
         np.loadtxt(osp.join(data_dir, split, f"{prefix}MinMax.txt"))
