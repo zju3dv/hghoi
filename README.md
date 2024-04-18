@@ -8,7 +8,16 @@
 
 ## Running
 
-Please see README.md in Python and Unity directories.
+Please see README.md in Python and Unity directories for details.
+
+### Unity
+
+We use Unity to export the training data, test the models, and visualize the generated motions. We achieve this by socket.
+
+### Python
+
+We use Python to train the models on the exported dataset.
+
 
 ## Citation
 

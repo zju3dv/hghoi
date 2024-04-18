@@ -7,13 +7,14 @@ The runtime Unity code is largly based on the codes of [SAMP](https://samp.is.tu
 Our code uses Unity to visualize and test. We rely on Python to run the network and send data with socket.
 
 ### Build socket servers with python
-- Build socket servers of each module with Python. Please look at [Python](../../python/README.md).
-- Please assign correct port number in Unity.
+- Build socket servers of each module with Python. Please look at [Python](../../python/README.md). You should run servers on a machine with ip x.x.x.x.
+- Please assign the ip (x.x.x.x) in TrajClient (you will see it when you open an .unity, it will be in the left pane. If you want to change ip, please double click it and change the number in the right pane.) and make sure port number is correct in Unity.
 
 ### HGHOI_Demo
 - Open the Demo Scene (Unity -> Assets -> Demo -> HGHOI_Demo.unity).
 - Hit the Play button.
 - You can control the character by SAMP first (WSAD, QE, Left-Shift, C, L).
+- You can click the button in the left (Sit / Lie) to test HGHOI.
 
 ### HGHOI_Test
 - Open the Test Scene (Unity -> Assets -> Demo -> HGHOI_Demo.unity).

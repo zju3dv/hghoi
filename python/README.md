@@ -8,6 +8,14 @@ conda activate hghoi
 pip install -r requirements.txt
 ```
 
+## Exported training data and pretrained models.
+
+You could use Unity to export the training data by yourself. We also provide our exported data. You can access the data and the pretrained models from [here](https://zjueducn-my.sharepoint.com/:f:/g/personal/hjpi_zju_edu_cn/ErSIBkSOwSFJh6Fk1Ml6BNABqulxpY_mEcGhnxxtQ0l2Bg?e=AzNZkD).
+
+For the training data, please download `MotionWorld.zip` and unzip it in `python/datasets/samp/`.
+
+For the pretrained models, please download `work_dirs.zip` and unzip it in `python/`.
+
 ## Training
 
 ### Goal pose
@@ -58,7 +66,7 @@ Train the motion infilling model.
 python train.py --config configs/motion/motion.yaml
 ```
 
-## Inference
+## Inference (Build servers to connect with Unity)
 
 We build Python servers and connect with Unity by socket. Please assign correct port in the Unity.
 
