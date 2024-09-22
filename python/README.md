@@ -10,7 +10,7 @@ pip install -r requirements.txt
 
 ## Exported training data and pretrained models.
 
-You could use Unity to export the training data by yourself. We also provide our exported data. You can access the data and the pretrained models from [here](https://zjueducn-my.sharepoint.com/:f:/g/personal/hjpi_zju_edu_cn/ErSIBkSOwSFJh6Fk1Ml6BNABqulxpY_mEcGhnxxtQ0l2Bg?e=AzNZkD).
+You could use Unity to export the training data by yourself. We also provide our exported data. You can access the data and the pretrained models from [DataLink](https://drive.google.com/file/d/1eU8Re-fCv49DuYAR2tds9MVOrS3dh5OX/view?usp=sharing) and [ModelLink](https://drive.google.com/file/d/13Qg1hIL38oq6ExkbhlKmnSBZd26Lgwxx/view?usp=sharing).
 
 For the training data, please download `MotionWorld.zip` and unzip it in `python/datasets/samp/`.
 
